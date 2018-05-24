@@ -1,0 +1,7 @@
+.top-container{
+    display: flex;
+    justify-content: space-around;
+    background-color: A64D3B;
+    height: 100px;
+    width: 100%;
+}

@@ -17,6 +17,7 @@ export class CityInputComponent implements OnInit {
 
   setCity(): void {
     this.cityService.setCity(this.city);
+    this.cityService.getInfo();
     console.log("Input works!");
   }
 
