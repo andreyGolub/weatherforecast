@@ -3,6 +3,7 @@ export class Weather {
     dayCloudCover: number;
     dayRainProbability: number;
     dayIcon: number;
+    dayIconPhrase: string;
     dayPhrase: string;
     dayWindSpeed: number;
     HoursOfSun: number;
@@ -11,6 +12,7 @@ export class Weather {
     nightCloudCover: number;
     nightRainProbability: number;
     nightIcon: number;
+    nightIconPhrase: string;
     nightPhrase: string;
     nightWindSpeed: number;
     realFeelTempMax: number;

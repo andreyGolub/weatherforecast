@@ -1,15 +1,17 @@
 import { Injectable } from '@angular/core';
 import { City } from './city';
 import { Weather } from './weather';
+import { CurrentWeather } from './current-weather';
 import axios from 'Axios';
 
 
 @Injectable({
   providedIn: 'root'
 })
-export class CityService {
+export class CityWeatherService {
   city: City;
   weather: Weather[];
+  currentWeather: CurrentWeather;
 
   constructor() { }
 
@@ -25,16 +27,38 @@ export class CityService {
       }
     })
     .then(async (response) =>{
-      let res = axios.get('http://dataservice.accuweather.com/forecasts/v1/daily/5day/' + response.data[0].Key,{
+      this.city.countryID = response.data[0].Country.ID;
+      this.city.key = response.data[0].Key;
+      let res = axios.get('http://dataservice.accuweather.com/forecasts/v1/hourly/1hour/' + this.city.key,{
         params: {
           apikey: 'QmRlAlNdDeX1vJLuP2wosFcXUZrka8bc',
           details: 'true',
           metric: 'true'
         }
-      })
+      });
       return res;
     })
     .then(async (response) => {
+      this.currentWeather = new CurrentWeather();
+      this.currentWeather.date = response.data.DataTime;
+      this.currentWeather.icon = response.data.WeatherIcom;
+      this.currentWeather.iconPhrase = response.data.IconPhrase;
+      this.currentWeather.temperature = response.data.Temperature;
+      this.currentWeather.realFeelTemperature = response.data.RealFeelTemperature;
+      this.currentWeather.wind = response.data.Wind.Speed.Value;
+      this.currentWeather.humidity = response.data.RelativeHumidity;
+      this.currentWeather.precipitationProbability = response.data.PrecipitationProbability;
+      this.currentWeather.cloudCover = response.data.CloudCover;
+      
+      let res =axios.get('http://dataservice.accuweather.com/forecasts/v1/daily/5day/' + this.city.key,{
+        params: {
+          apikey: 'QmRlAlNdDeX1vJLuP2wosFcXUZrka8bc',
+          details: 'true',
+          metric: 'true'
+        }
+      });
+      return res;
+    }).then(async (response) =>{
       this.weather = new Array<Weather>();
       for (let i = 0; i < response.data.DailyForecasts.length; i++) {
         let tempWeather = new Weather();
@@ -43,6 +67,7 @@ export class CityService {
         tempWeather.dayCloudCover = response.data.DailyForecasts[i].Day.CloudCover;
         tempWeather.dayRainProbability = response.data.DailyForecasts[i].Day.RainProbability;
         tempWeather.dayIcon = response.data.DailyForecasts[i].Day.Icon;
+        tempWeather.dayIconPhrase = response.data.DailyForecasts[i].Day.IconPhrase;
         tempWeather.dayPhrase = response.data.DailyForecasts[i].Day.LongPhrase;
         tempWeather.dayWindSpeed = response.data.DailyForecasts[i].Day.Wind.Speed.Value;
         tempWeather.HoursOfSun = response.data.DailyForecasts[i].HoursOfSun;
@@ -51,6 +76,7 @@ export class CityService {
         tempWeather.nightCloudCover = response.data.DailyForecasts[i].Night.CloudCover;
         tempWeather.nightRainProbability = response.data.DailyForecasts[i].Night.RainProbability;
         tempWeather.nightIcon = response.data.DailyForecasts[i].Night.Icon;
+        tempWeather.nightIconPhrase = response.data.DailyForecasts[i].Night.IconPhrase;
         tempWeather.nightPhrase = response.data.DailyForecasts[i].Night.LongPhrase;
         tempWeather.nightWindSpeed = response.data.DailyForecasts[i].Night.Wind.Speed.Value;
         tempWeather.realFeelTempMax = response.data.DailyForecasts[i].RealFeelTemperature.Maximum.Value;
@@ -62,8 +88,6 @@ export class CityService {
 
         this.weather.push(tempWeather);
       }
-      //console.log(response.data);
-      console.log(this.weather);
     })
     .catch((error) => {
       console.log(error);

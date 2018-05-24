@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { City} from '../city';
-import { CityService} from '../city-weather.service';
+import { CityWeatherService} from '../city-weather.service';
 
 @Component({
   selector: 'app-city-input',
@@ -10,14 +10,15 @@ import { CityService} from '../city-weather.service';
 export class CityInputComponent implements OnInit {
   city: City = {
     name: "",
-    key: 0 
+    countryID: "",
+    key: 0
   };
 
-  constructor(private cityService: CityService) { }
+  constructor(private cityWeatherService: CityWeatherService) { }
 
   setCity(): void {
-    this.cityService.setCity(this.city);
-    this.cityService.getInfo();
+    this.cityWeatherService.setCity(this.city);
+    this.cityWeatherService.getInfo();
     console.log("Input works!");
   }
 

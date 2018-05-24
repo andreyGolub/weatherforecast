@@ -1,15 +1,15 @@
 import { TestBed, inject } from '@angular/core/testing';
 
-import { CityService } from './city-weather.service';
+import { CityWeatherService } from './city-weather.service';
 
 describe('CityService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [CityService]
+      providers: [CityWeatherService]
     });
   });
 
-  it('should be created', inject([CityService], (service: CityService) => {
+  it('should be created', inject([CityWeatherService], (service: CityWeatherService) => {
     expect(service).toBeTruthy();
   }));
 });

@@ -1,0 +1,13 @@
+<div class="date">{{cityWeather.currentWeather.date}}</div>
+<div class="location">{{cityWeather.city.name | uppercase}}, {{cityWeather.city.countryID}}</div>
+<div class="temperature">{{cityWeather.currentWeather.temperature}}</div>
+<div >
+    <img src="" alt="">
+    <div class="condition">{{cityWeather.currentWeather.iconPhrase}}</div>
+  </div>
+<div class="additional">
+  <div>Humidity: {{cityWeather.currentWeather.humidity}}</div>
+  <div>Wind speed: {{cityWeather.currentWeather.wind}} km//h</div>
+  <div>Feels like: </div>
+  <div>Clouds: {{cityWeather.currentWeather.cloudCover}} /%</div>
+</div>
