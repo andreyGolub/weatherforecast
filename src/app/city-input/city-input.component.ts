@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { City} from '../city';
-import { CityService} from '../city.service';
+import { CityService} from '../city-weather.service';
 
 @Component({
   selector: 'app-city-input',
