@@ -3,6 +3,7 @@ import { City } from './city';
 import { Weather } from './weather';
 import { CurrentWeather } from './current-weather';
 import axios from 'Axios';
+import { CLEAN_PROMISE } from '@angular/core/src/render3/instructions';
 
 
 @Injectable({
@@ -39,17 +40,19 @@ export class CityWeatherService {
       return res;
     })
     .then(async (response) => {
-      this.currentWeather = new CurrentWeather();
-      this.currentWeather.date = response.data.DataTime;
-      this.currentWeather.icon = response.data.WeatherIcom;
-      this.currentWeather.iconPhrase = response.data.IconPhrase;
-      this.currentWeather.temperature = response.data.Temperature;
-      this.currentWeather.realFeelTemperature = response.data.RealFeelTemperature;
-      this.currentWeather.wind = response.data.Wind.Speed.Value;
-      this.currentWeather.humidity = response.data.RelativeHumidity;
-      this.currentWeather.precipitationProbability = response.data.PrecipitationProbability;
-      this.currentWeather.cloudCover = response.data.CloudCover;
-      
+      console.log(response);
+      let tmp = new CurrentWeather();
+      tmp.date = response.data[0].DateTime;
+      tmp.icon = response.data[0].WeatherIcon;
+      tmp.iconPhrase = response.data[0].IconPhrase;
+      tmp.temperature = response.data[0].Temperature.Value;
+      tmp.realFeelTemperature = response.data[0].RealFeelTemperature.Value;
+      tmp.wind = response.data[0].Wind.Speed.Value;
+      tmp.humidity = response.data[0].RelativeHumidity;
+      tmp.precipitationProbability = response.data[0].PrecipitationProbability;
+      tmp.cloudCover = response.data[0].CloudCover;
+      this.currentWeather = tmp;
+
       let res =axios.get('http://dataservice.accuweather.com/forecasts/v1/daily/5day/' + this.city.key,{
         params: {
           apikey: 'QmRlAlNdDeX1vJLuP2wosFcXUZrka8bc',
@@ -88,6 +91,7 @@ export class CityWeatherService {
 
         this.weather.push(tempWeather);
       }
+      console.log(response.data);
     })
     .catch((error) => {
       console.log(error);
