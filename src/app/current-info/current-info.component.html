@@ -1,13 +1,14 @@
-<div class="date">{{cityWeather.currentWeather.date}}</div>
-<div class="location">{{cityWeather.city.name | uppercase}}, {{cityWeather.city.countryID}}</div>
-<div class="temperature">{{cityWeather.currentWeather.temperature}}</div>
+<div class="date" *ngIf="isInit" >{{cityWeather.currentWeather.date}}</div>
+<div class="location" *ngIf="isInit">{{cityWeather.city.name | uppercase}}, {{cityWeather.city.countryID}}</div>
+<div class="temperature" *ngIf="isInit">{{cityWeather.currentWeather.temperature}}</div>
 <div >
     <img src="" alt="">
-    <div class="condition">{{cityWeather.currentWeather.iconPhrase}}</div>
+    <div class="condition" *ngIf="isInit">{{cityWeather.currentWeather.iconPhrase}}</div>
   </div>
 <div class="additional">
-  <div>Humidity: {{cityWeather.currentWeather.humidity}} %</div>
-  <div>Wind speed: {{cityWeather.currentWeather.wind}} km/h</div>
-  <div>Feels like: {{cityWeather.currentWeather.realFeelTemperature}}</div>
-  <div>Clouds: {{cityWeather.currentWeather.cloudCover}} %</div>
+  <div *ngIf="isInit">Humidity: {{cityWeather.currentWeather.humidity}} %</div>
+  <div *ngIf="isInit">Wind speed: {{cityWeather.currentWeather.wind}} km/h</div>
+  <div *ngIf="isInit">Feels like: {{cityWeather.currentWeather.realFeelTemperature}}</div>
+  <div *ngIf="isInit">Precipitation probability: {{cityWeather.currentWeather.precipitationProbability}}</div>
+  <div *ngIf="isInit">Clouds: {{cityWeather.currentWeather.cloudCover}} %</div>
 </div>

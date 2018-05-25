@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Output, EventEmitter } from '@angular/core';
 import { City } from './city';
 import { Weather } from './weather';
 import { CurrentWeather } from './current-weather';
@@ -13,8 +13,11 @@ export class CityWeatherService {
   city: City;
   weather: Weather[];
   currentWeather: CurrentWeather;
+  isInit = false;
 
   constructor() { }
+
+  @Output() change: EventEmitter<boolean> = new EventEmitter();
 
   setCity(city: City){
     this.city = city;
@@ -92,6 +95,8 @@ export class CityWeatherService {
         this.weather.push(tempWeather);
       }
       console.log(response.data);
+      this.isInit = true;
+      this.change.emit(this.isInit);
     })
     .catch((error) => {
       console.log(error);

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostBinding } from '@angular/core';
 import { CityWeatherService} from '../city-weather.service';
 import { CurrentWeather } from '../current-weather'; 
 
@@ -8,27 +8,14 @@ import { CurrentWeather } from '../current-weather';
   styleUrls: ['./current-info.component.css']
 })
 export class CurrentInfoComponent implements OnInit {
-  currentWeather: CurrentWeather = {
-    date: "",
-    icon: 0,
-    iconPhrase: "",
-    temperature: 0,
-    realFeelTemperature: 0,
-    wind: 0,
-    humidity: 0,
-    precipitationProbability: 0,
-    cloudCover: 0
-  }
   
+  isInit = false;
 
   constructor(public cityWeather: CityWeatherService) { }
 
-  getCurrentWeather(){
-    this.currentWeather = this.cityWeather.currentWeather;
-  }
-
   ngOnInit() {
-    //this.getCurrentWeather();
+    this.cityWeather.change.subscribe( (isInit) => {
+      this.isInit=isInit;
+    })
   }
-
 }
