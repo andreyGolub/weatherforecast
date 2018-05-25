@@ -1,14 +1,19 @@
 <div class="date" *ngIf="isInit" >{{cityWeather.currentWeather.date}}</div>
 <div class="location" *ngIf="isInit">{{cityWeather.city.name | uppercase}}, {{cityWeather.city.countryID}}</div>
-<div class="temperature" *ngIf="isInit">{{cityWeather.currentWeather.temperature}}</div>
+<div class="temperature" *ngIf="isInit">{{cityWeather.currentWeather.temperature}}°C</div>
 <div >
     <img src="" alt="">
     <div class="condition" *ngIf="isInit">{{cityWeather.currentWeather.iconPhrase}}</div>
   </div>
 <div class="additional">
-  <div *ngIf="isInit">Humidity: {{cityWeather.currentWeather.humidity}} %</div>
-  <div *ngIf="isInit">Wind speed: {{cityWeather.currentWeather.wind}} km/h</div>
-  <div *ngIf="isInit">Feels like: {{cityWeather.currentWeather.realFeelTemperature}}</div>
-  <div *ngIf="isInit">Precipitation probability: {{cityWeather.currentWeather.precipitationProbability}}</div>
-  <div *ngIf="isInit">Clouds: {{cityWeather.currentWeather.cloudCover}} %</div>
+  <div *ngIf="isInit; else elseBlockHumidity">Humidity: {{cityWeather.currentWeather.humidity}} %</div>
+  <ng-template #elseBlockHumidity>Humidity: </ng-template>
+  <div *ngIf="isInit; else elseBlockWind">Wind speed: {{cityWeather.currentWeather.wind}} km/h</div>
+  <ng-template #elseBlockWind>Wind speed:</ng-template>
+  <div *ngIf="isInit; else elseBlockFeel">Feels like: {{cityWeather.currentWeather.realFeelTemperature}}°C</div>
+  <ng-template #elseBlockFeel>Feels like: </ng-template>
+  <div *ngIf="isInit; else elseBlockProb">Precipitation probability: {{cityWeather.currentWeather.precipitationProbability}} %</div>
+  <ng-template #elseBlockProb>Precipitation probability: </ng-template>
+  <div *ngIf="isInit; else elseBlockClouds">Clouds: {{cityWeather.currentWeather.cloudCover}} %</div>
+  <ng-template #elseBlockClouds>Clouds: </ng-template>
 </div>

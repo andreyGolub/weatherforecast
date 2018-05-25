@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CityWeatherService} from '../city-weather.service';
 
 @Component({
   selector: 'app-weather-charts',
@@ -7,9 +8,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class WeatherChartsComponent implements OnInit {
 
-  constructor() { }
+  isInit = false;
+
+  constructor(public cityWeather: CityWeatherService) { }
+
+  draw(){
+    
+  }
 
   ngOnInit() {
+    this.cityWeather.change.subscribe( (isInit) => {
+      this.isInit=isInit;
+      this.draw();
+    })
   }
 
 }
