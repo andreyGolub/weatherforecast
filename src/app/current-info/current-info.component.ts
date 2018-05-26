@@ -10,12 +10,13 @@ import { CurrentWeather } from '../current-weather';
 export class CurrentInfoComponent implements OnInit {
   
   isInit = false;
-
+  date;
   constructor(public cityWeather: CityWeatherService) { }
 
   ngOnInit() {
-    this.cityWeather.change.subscribe( (isInit) => {
-      this.isInit=isInit;
+    this.cityWeather.change.subscribe((isInit) => {
+      this.isInit = isInit;
+      this.date = this.cityWeather.currentWeather.date.substr(0, 10)
     })
   }
 }

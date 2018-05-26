@@ -1,19 +1,17 @@
-
-<div [chart]="chart"></div>`
 <div class="temperatureCharts">
-  <canvas id="maxTemp"></canvas>
-  <canvas id="minTemp"></canvas>
+  <div [chart]="chartMaxTemp"></div>
+  <div [chart]="chartMinTemp"></div>
 </div>
 <div class="rainProbCharts">
-  <canvas id="dayProb"></canvas>
-  <canvas id="nightProb"></canvas>
+  <div [chart]="chartDayProb"></div>
+  <div [chart]="chartNightProb"></div>
 </div>
 <div class="windCharts">
-  <canvas id="dayWind"></canvas>
-  <canvas id="nightWind"></canvas>
+  <div [chart]="chartDayWind"></div>
+  <div [chart]="chartNightWind"></div>
 </div>
 <div class="sunMoonCharts">
-  <canvas id="sunMoonRise"></canvas>
-  <canvas id="sunMoonSet"></canvas>
+  <div [chart]="chartSunMoonRise"></div>
+  <div [chart]="chartSunMoonSet"></div>
 </div>
-<canvas id="hoursOfSunChart"></canvas>
+<div [chart]="chartHoursOfSunChart"></div>

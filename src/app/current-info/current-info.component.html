@@ -1,10 +1,10 @@
-<div class="date" *ngIf="isInit" >{{cityWeather.currentWeather.date}}</div>
+<div class="date" *ngIf="isInit">{{date}}</div>
 <div class="location" *ngIf="isInit">{{cityWeather.city.name | uppercase}}, {{cityWeather.city.countryID}}</div>
 <div class="temperature" *ngIf="isInit">{{cityWeather.currentWeather.temperature}}°C</div>
-<div >
-    <img src="" alt="">
-    <div class="condition" *ngIf="isInit">{{cityWeather.currentWeather.iconPhrase}}</div>
-  </div>
+<div>
+  <img src="" alt="">
+  <div class="condition" *ngIf="isInit">{{cityWeather.currentWeather.iconPhrase}}</div>
+</div>
 <div class="additional">
   <div *ngIf="isInit; else elseBlockHumidity">Humidity: {{cityWeather.currentWeather.humidity}} %</div>
   <ng-template #elseBlockHumidity>Humidity: </ng-template>
