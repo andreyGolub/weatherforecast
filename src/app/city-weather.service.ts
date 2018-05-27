@@ -100,6 +100,7 @@ export class CityWeatherService {
     })
     .catch((error) => {
       console.log(error);
+      prompt("Chosen city doesn't exist. Please, write correct city");
     });
   }
 }
