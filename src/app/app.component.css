@@ -1,7 +1,8 @@
 .top-container{
-    display: flex;
     justify-content: space-around;
-    background-color: A64D3B;
-    height: 100px;
-    width: 100%;
+    display: flex;
+    background-color: #998E8E;
+    padding: 5px;
+    opacity: 50%;
+    border-radius: 5px;
 }

@@ -47,7 +47,7 @@ export class CityWeatherService {
       let tmp = new CurrentWeather();
       tmp.date = response.data[0].DateTime;
       tmp.icon = response.data[0].WeatherIcon;
-      tmp.iconPhrase = response.data[0].IconPhrase;
+      tmp.iconPhrase = response.data[0].IconPhrase.replace("w/",",");
       tmp.temperature = response.data[0].Temperature.Value;
       tmp.realFeelTemperature = response.data[0].RealFeelTemperature.Value;
       tmp.wind = response.data[0].Wind.Speed.Value;

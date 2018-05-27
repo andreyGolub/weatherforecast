@@ -1,19 +1,27 @@
-<div class="date" *ngIf="isInit">{{date}}</div>
-<div class="location" *ngIf="isInit">{{cityWeather.city.name | uppercase}}, {{cityWeather.city.countryID}}</div>
-<div class="temperature" *ngIf="isInit">{{cityWeather.currentWeather.temperature}}°C</div>
-<div>
-  <img src="" alt="">
-  <div class="condition" *ngIf="isInit">{{cityWeather.currentWeather.iconPhrase}}</div>
+<div class="container">
+  <div class="date" *ngIf="isInit"><b>{{date}}</b></div>
+  <div class="location">
+    <div *ngIf="isInit"><b>{{cityWeather.city.name | uppercase}}, {{cityWeather.city.countryID}}</b></div>
+  </div>
+  <div class="temperature">
+    <div *ngIf="isInit">{{cityWeather.currentWeather.temperature}}°C</div>
+  </div>
+  
+  <div class="condition">
+    <img src="" alt="">
+    <div *ngIf="isInit">{{cityWeather.currentWeather.iconPhrase}}</div>
+  </div>
+  <div class="additional">
+    <div class="content" *ngIf="isInit; else elseBlockHumidity">Humidity: {{cityWeather.currentWeather.humidity}} %</div>
+    <ng-template class="content" #elseBlockHumidity>Humidity:      </ng-template>
+    <div class="content" *ngIf="isInit; else elseBlockWind">Wind speed: {{cityWeather.currentWeather.wind}} km/h</div>
+    <ng-template class="content" #elseBlockWind>Wind speed:      </ng-template>
+    <div class="content" *ngIf="isInit; else elseBlockFeel">Feels like: {{cityWeather.currentWeather.realFeelTemperature}}°C</div>
+    <ng-template class="content" #elseBlockFeel>Feels like:      </ng-template>
+    <div class="content" *ngIf="isInit; else elseBlockProb">Precipitation probability: {{cityWeather.currentWeather.precipitationProbability}} %</div>
+    <ng-template class="content" #elseBlockProb>Precipitation probability: </ng-template>
+    <div class="content" *ngIf="isInit; else elseBlockClouds">Clouds:      {{cityWeather.currentWeather.cloudCover}} %</div>
+    <ng-template class="content" #elseBlockClouds>Clouds: </ng-template>
+  </div>
 </div>
-<div class="additional">
-  <div *ngIf="isInit; else elseBlockHumidity">Humidity: {{cityWeather.currentWeather.humidity}} %</div>
-  <ng-template #elseBlockHumidity>Humidity: </ng-template>
-  <div *ngIf="isInit; else elseBlockWind">Wind speed: {{cityWeather.currentWeather.wind}} km/h</div>
-  <ng-template #elseBlockWind>Wind speed:</ng-template>
-  <div *ngIf="isInit; else elseBlockFeel">Feels like: {{cityWeather.currentWeather.realFeelTemperature}}°C</div>
-  <ng-template #elseBlockFeel>Feels like: </ng-template>
-  <div *ngIf="isInit; else elseBlockProb">Precipitation probability: {{cityWeather.currentWeather.precipitationProbability}} %</div>
-  <ng-template #elseBlockProb>Precipitation probability: </ng-template>
-  <div *ngIf="isInit; else elseBlockClouds">Clouds: {{cityWeather.currentWeather.cloudCover}} %</div>
-  <ng-template #elseBlockClouds>Clouds: </ng-template>
-</div>
+

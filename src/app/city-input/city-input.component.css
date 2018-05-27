@@ -1,13 +1,13 @@
 .searchCity{
-    background-color: BF9D96;
     border-radius: 2px;
-    border-color: FFD1C8;
+    border: 0px;
+    margin-left: 10px;
+    width: 20px;
+    height: 20px;
     
 }
 
 .container{
     display: flex;
     justify-content: space-between;
-    background-color: FFD1C8;
-    width: 50px;
 }

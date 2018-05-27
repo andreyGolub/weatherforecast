@@ -178,6 +178,7 @@ export class WeatherChartsComponent implements OnInit {
       ]
     });
   }
+  
   ngOnInit() {
     this.cityWeather.change.subscribe((isInit) => {
       this.isInit = isInit;
